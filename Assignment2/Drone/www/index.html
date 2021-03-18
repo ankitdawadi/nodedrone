@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+	<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
+		style-src 'self' 'unsafe-inline'; 
+		script-src * 'unsafe-inline' ;
+		media-src *; img-src 'self' data: content:;">
+
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+	<meta name="color-scheme" content="light dark">
+	<link rel="stylesheet" href="css/index.css">
+	<script src="jquery.js"></script>
+	<link rel="stylesheet" href="css/jquery.mobile.css">
+	<script src="jquery.mobile.js"></script>
+	<title>Drone Logger</title>
+	<script src="js/DroneLogs.js"></script>
+	<script src="cordova.js"></script>
+</head>
+
+<body>
+
+	<body>
+		<div data-role="page" id="DroneLogs">
+			<div data-role="header">
+				<!--header name of home page-->
+				<h1>QFX cinemas</h1>
+			</div>
+			<div data-role="content">
+				<!--Creating list-->
+				<ul data-role="listview" id="movieList">
+					<li><a href="#droneView" data-icon="arrow-r" id="Drone1">Day 1</a></li>
+					
+				</ul>
+			</div>
+			<!--FOOTER on homepage-->
+			<div data-role="footer" class="ui-bar">
+				<a data-icon="plus" href="#droneView" id="LogBtn">Add Movies</a>
+				<input type="search" name="search" id="search-basic" value="" />
+				<a  id="searchBtn">Search</a>
+				<a href="/" data-role="button" data-icon="arrow-l" id="home1">Previous</a>
+				<h2 id="tCopyright" class="aligncenter">&copy;CQUniversity, R. Balsys. 2019.</h2>
+				 
+			</div>
+		</div>
+		<!--Header buttons-->
+		<div data-role="page" id="droneView">
+			<div data-role="header">
+				<a id="formClear2" class="alignleft">Clear</a>
+				<h2 id="tHeader" class="aligncenter">ADD MOVIES</h2>
+				<a href="#showLogs" class="displayLogs alignright" id="showLogs">Show Logs</a>
+			</div>
+			<div data-role="content">
+				<!--Form for entering day logs-->
+				<form id="myForm" class="">
+					<label> Name of a movie: </label>
+					<input id="moviename" name="moviename" placeholder="Movie Name"></input>
+					<label>Actor/Actress Name: </label>
+					<input type="text" id="actor" name="actor" placeholder="Lead Actor"></input>
+					<input type="text" id="actress" name="actress" placeholder="Lead Actress"></input>
+					<label>Ticket Price :</label>
+					<input type="text" id="price" name="price" placeholder="Price(AUD)"></input>
+					<label>Movie Time: </label>
+					<input type="datetime-local" id="birthdaytime" name="birthdaytime">
+					<label>Type of Seat:</label>
+					<select id="DropDownList" name="DropDownList">
+						<option value="Empty"></option>
+						<option value="Silver">Silver</option>
+						<option value="Gold">Gold</option>
+						<option value="Platinum"> Platinum</option>
+						
+					</select>
+					<a data-role="button" id="saveLog">Save Movies</a>
+				</form>
+			</div>
+			<!--FOOTER-->
+			<div data-role="footer">
+				
+				<a href="#DroneLogs" data-role="button" data-icon="arrow-l" id="home">Previous</a>
+				<a href="#DroneLogs" data-role="button" data-icon="home" id="home4">Home</a>
+			</div>
+		</div>
+		<div data-role="page" id="droneView1">
+			<div data-role="header">
+				<a id="formClear1" class="alignleft">Clear</a>
+				<h2 id="tHeader" class="aligncenter">Edit Movies</h2>
+				<a href="/" class="displayLogs alignright" id="showLogs">Show movies</a>
+			</div>
+			<div data-role="content">
+				<!--Form for entering day logs-->
+				<form id="myForm1" class="">
+					<label> Name of a movie: </label>
+					<input id="moviename1" name="moviename1" placeholder=""></input>
+					<label>Actor/Actress Name: </label>
+					<input type="text" id="actor1" name="actor1" placeholder=""></input>
+					<input type="text" id="actress1" name="actress1" placeholder=""></input>
+					<label>Ticket Price :</label>
+					<input type="text" id="price1" name="price1" placeholder=""></input>
+					<label>Movie Time: </label>
+					<input type="datetime-local" id="birthdaytime1" name="birthdaytime1" placeholder="" value="">
+					<label>Type of Seat:</label>
+					<select id="DropDownList1" value="" name="DropDownList1" placeholder="">
+						<option id=" " value="Empty"></option>
+						<option id ="Silver" value="Silver">Silver</option>
+						<option id="Gold" value="Gold">Gold</option>
+						<option id="Platinum" value="Platinum"> Platinum</option>
+						
+					</select>
+					<a data-role="button" id="editLog">Edit</a>
+					<a data-role="button" id="deleteLog">Delete</a>
+				</form>
+			</div>
+			<!--FOOTER-->
+			<div data-role="footer">
+				
+				<a href="#DroneLogs" data-role="button" data-icon="arrow-l" id="home2">Previous</a>
+				<a href="#DroneLogs" data-role="button" data-icon="home" id="home3">Home</a>
+			</div>
+		</div>
+		<!--Header of Drone logs -->
+		<div data-role="page" id="showLogs">
+			<div data-role="header" data-position="fixed">
+				
+				<h1>Show Logs</h1>
+				
+			</div>
+			<!--Display log of days.-->
+			<div data-role="content" id="ShowLogsContent">
+				Date, latitude, longitude, serial#, pilot, key, contract#, category
+				<div class="resData"></div>
+			</div>
+			<!--FOOTER-->
+			<div data-role="footer">
+				<a data-role="button" data-icon="back" id="back">Back</a>
+			</div>
+		</div>
+
+		<!--Header of Cloud Drone logs -->
+		<div data-role="page" id="cloudLog">
+			<div data-role="header" data-position="fixed">
+				<a data-icon="back" href="#showLogs">Back</a>
+				<h1>Cloud Drone Log</h1>
+				<a href="#DroneLogs" data-role="button" data-icon="home" id="home">Home</a>
+			</div>
+			<!--Display log of days.-->
+			<div data-role="content" id="ShowClousLogsContent">
+				<h1>Cloud Drone Entries:</h1> <br>
+				Date, latitude, longitude, serial#, pilot, key, contract#, category
+				<div class="cloudData"></div>
+			</div>
+			<!--FOOTER-->
+			<div data-role="footer">
+
+			</div>
+		</div>
+	</body>
+
+</html>
